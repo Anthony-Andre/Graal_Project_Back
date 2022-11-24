@@ -7,28 +7,47 @@ import java.util.Set;
 
 public interface TraineeService {
 
-
-    // findAll
-
+    /**
+     * find all trainees
+     * @return all trainees
+     */
     Set<TraineeDto> findAll();
 
-    // findById
-
+    /**
+     * find trainee with its id
+     * @param id
+     * @return optional with trainee if found else optional empty
+     */
     Optional<TraineeDto> findById(int id);
 
-    // search
+    /**
+     * search trainees with criteria lastname, firstname ;
+     * one criteria can be null, not both
+     * @param lastname
+     * @param firstname
+     * @return trainee set with this lastname (if not null) and this firstname (if not null) ;
+     * empty set if no trainee found with these criteria or both criteria are null
+     */
+    Set<TraineeDto> search(String lastname, String firstname);
 
-    Set<TraineeDto> search(String lastName, String firstName);
-
-    // add
-
+    /**
+     * add new trainee
+     * @param traineeDto
+     * @return trainee completed (id, default values)
+     */
     TraineeDto add(TraineeDto traineeDto);
 
-    // update
+    /**
+     * update trainee
+     * @param traineeDto
+     * @return trainee updated if found, else optional empty
+     */
+    Optional<TraineeDto> update(TraineeDto traineeDto);
 
-    TraineeDto update(TraineeDto traineeDto);
-
-    // delete
-
-    void delete(int id);
+    /**
+     * delete trainee with its id
+     * @param id
+     * @return true if found and deleted, false if not found
+     */
+    boolean delete(int id);
 }

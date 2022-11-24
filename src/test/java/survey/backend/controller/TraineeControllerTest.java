@@ -1,21 +1,16 @@
 package survey.backend.controller;
 
 import org.junit.jupiter.api.Test;
-import org.mockito.BDDMockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import survey.backend.dto.TraineeDto;
 import survey.backend.service.TraineeService;
 
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.BDDMockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -42,8 +37,8 @@ class TraineeControllerTest {
         int id = 123;
         var traineeDto = TraineeDto.builder()
                 .id(id)
-                .lastName("Stallone")
-                .firstName("Sly")
+                .lastname("Stallone")
+                .firstname("Sly")
                 .build();
         given(traineeService.findById(id))
                 .willReturn(Optional.of(traineeDto))

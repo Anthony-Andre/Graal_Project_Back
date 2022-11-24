@@ -15,11 +15,11 @@ class TraineeDtoTest {
         // then
         assertAll(
                 () -> assertNull(traineeDto.getId(), "id"),
-                () -> assertNull(traineeDto.getFirstName(), "firstname"),
-                () -> assertNull(traineeDto.getLastName(), "lastname"),
+                () -> assertNull(traineeDto.getFirstname(), "firstname"),
+                () -> assertNull(traineeDto.getLastname(), "lastname"),
                 () -> assertNull(traineeDto.getEmail(), "email"),
                 () -> assertNull(traineeDto.getPhoneNumber(), "phone number"),
-                () -> assertNull(traineeDto.getBirthDate(), "birthdate"));
+                () -> assertNull(traineeDto.getBirthdate(), "birthdate"));
     }
 
     // TODO: builder
@@ -33,17 +33,17 @@ class TraineeDtoTest {
 
         var traineeDto = TraineeDto.builder()
                 .id(2)
-                .firstName("Sly")
+                .firstname("Sly")
                 .phoneNumber("+33(6)22222222")
                 .build();
 
         assertAll(
                 () -> assertEquals(traineeId, traineeDto.getId(), "id"),
-                () -> assertNull(traineeDto.getLastName(), "lastname"),
-                () -> assertEquals(traineeFirstName, traineeDto.getFirstName(), "firstname"),
+                () -> assertNull(traineeDto.getLastname(), "lastname"),
+                () -> assertEquals(traineeFirstName, traineeDto.getFirstname(), "firstname"),
                 () -> assertNull(traineeDto.getEmail(), "email"),
                 () -> assertEquals(traineePhoneNumber, traineeDto.getPhoneNumber(), "phone number"),
-                () -> assertNull(traineeDto.getBirthDate(), "birthdate")
+                () -> assertNull(traineeDto.getBirthdate(), "birthdate")
         );
 
     }
@@ -69,11 +69,11 @@ class TraineeDtoTest {
 
         assertAll(
                 () -> assertEquals(traineeId, traineeDto.getId(), "id"),
-                () -> assertEquals(traineeLastName, traineeDto.getLastName(), "lastname"),
-                () -> assertEquals(traineeFirstName, traineeDto.getFirstName(), "firstname"),
+                () -> assertEquals(traineeLastName, traineeDto.getLastname(), "lastname"),
+                () -> assertEquals(traineeFirstName, traineeDto.getFirstname(), "firstname"),
                 () -> assertEquals(traineeEmail, traineeDto.getEmail(), "email"),
                 () -> assertEquals(traineePhoneNumber, traineeDto.getPhoneNumber(), "phone number"),
-                () -> assertEquals(birthDate, traineeDto.getBirthDate(), "birthdate")
+                () -> assertEquals(birthDate, traineeDto.getBirthdate(), "birthdate")
         );
 
     }
