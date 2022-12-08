@@ -34,6 +34,13 @@ public class PoeController {
                 .orElseThrow(() -> NoDataFoundError.withId("Trainee", Math.toIntExact(poeDto.getId())));
     }
 
+    @DeleteMapping("{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void delete(@PathVariable("id") int id) {
+        if (!service.delete(id)) {
+            throw NoDataFoundError.withId("Poe", id);
+        }
+    }
 
 //    @GetMapping
 //    public Set<PoeDto>list() {
