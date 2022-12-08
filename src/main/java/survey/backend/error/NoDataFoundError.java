@@ -32,4 +32,13 @@ public class NoDataFoundError extends RuntimeException {
                         + id
                         + " not found");
     }
+
+    public static NoDataFoundError noResults(String itemType, String message) {
+        return new NoDataFoundError(
+                itemType
+                        + " return 0 results"
+                        + " with "
+                        + message
+        );
+    }
 }
