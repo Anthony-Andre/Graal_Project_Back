@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.*;
 import survey.backend.dto.PoeDto;
 import survey.backend.dto.TraineeDto;
 import survey.backend.entities.Poe;
+import survey.backend.entities.Trainee;
+import survey.backend.error.NoDataFoundError;
 import survey.backend.service.impl.PoeService;
 
 import java.time.LocalDate;
@@ -24,6 +26,12 @@ public class PoeController {
     @GetMapping
     public Iterable<Poe> findAll(){
         return this.service.findAll();
+    }
+
+    @PutMapping
+    public Poe update(@RequestBody PoeDto poeDto) {
+        return this.service.update(poeDto)
+                .orElseThrow(() -> NoDataFoundError.withId("Trainee", Math.toIntExact(poeDto.getId())));
     }
 
 
