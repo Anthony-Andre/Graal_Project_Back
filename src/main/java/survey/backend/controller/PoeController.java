@@ -11,6 +11,7 @@ import survey.backend.entities.Trainee;
 import survey.backend.error.NoDataFoundError;
 import survey.backend.service.impl.PoeService;
 
+import javax.validation.Valid;
 import java.time.LocalDate;
 import java.util.Objects;
 import java.util.Optional;
@@ -36,6 +37,12 @@ public class PoeController {
         } else {
             throw NoDataFoundError.withId("Poe", id);
         }
+    }
+
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public Poe add(@Valid @RequestBody PoeDto poeDto) {
+        return this.service.add(poeDto);
     }
 
     @PutMapping

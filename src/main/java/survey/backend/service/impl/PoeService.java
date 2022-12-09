@@ -25,6 +25,10 @@ public class PoeService {
         return this.repository.findById((long) id);
     }
 
+    public Poe add(PoeDto poeDto){
+        return this.repository.save(poeDto.toPoe());
+    }
+
     public boolean delete(int id) {
         Optional<Poe> oPoe = this.repository.findById((long) id);
         if (oPoe.isPresent()) {
