@@ -28,10 +28,20 @@ public class PoeController {
         return this.service.findAll();
     }
 
+    @GetMapping("{id}")
+    public Poe getById(@PathVariable("id") int id) {
+        Optional<Poe> optPoe = service.findById(id);
+        if (optPoe.isPresent()) {
+            return optPoe.get();
+        } else {
+            throw NoDataFoundError.withId("Poe", id);
+        }
+    }
+
     @PutMapping
     public Poe update(@RequestBody PoeDto poeDto) {
         return this.service.update(poeDto)
-                .orElseThrow(() -> NoDataFoundError.withId("Trainee", Math.toIntExact(poeDto.getId())));
+                .orElseThrow(() -> NoDataFoundError.withId("Poe", Math.toIntExact(poeDto.getId())));
     }
 
     @DeleteMapping("{id}")

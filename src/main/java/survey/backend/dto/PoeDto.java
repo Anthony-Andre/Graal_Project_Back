@@ -2,7 +2,6 @@ package survey.backend.dto;
 
 import lombok.*;
 import survey.backend.entities.Poe;
-import survey.backend.entities.PoeType;
 
 import java.util.Date;
 
