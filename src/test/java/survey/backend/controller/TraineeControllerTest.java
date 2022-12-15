@@ -7,6 +7,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import survey.backend.dto.TraineeDto;
+import survey.backend.handler.controller.TraineeController;
 import survey.backend.service.TraineeService;
 
 import java.util.Optional;
