@@ -1,7 +1,7 @@
 package survey.backend.dto;
 
 import lombok.*;
-import survey.backend.entities.Trainee;
+import survey.backend.repository.entities.Trainee;
 
 import javax.validation.constraints.*;
 import java.util.Date;

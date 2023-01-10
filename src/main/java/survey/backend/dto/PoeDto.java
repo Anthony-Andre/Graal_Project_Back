@@ -1,25 +1,25 @@
 package survey.backend.dto;
 
 import lombok.*;
-import survey.backend.entities.Poe;
+import lombok.experimental.SuperBuilder;
+import survey.backend.repository.entities.Poe;
+import survey.backend.repository.entities.PoeType;
+import survey.backend.repository.entities.Trainee;
 
 import java.util.Date;
+import java.util.Set;
 
-@Builder
+@SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter @Setter
 public class PoeDto {
 
-    public enum PoeType{
-        POEI, POEC
-    }
-
     private Long id;
     private String title;
     private Date beginDate;
     private Date endDate;
-    private survey.backend.entities.PoeType type;
+    private PoeType type;
 
     public Poe toPoe() {
         Poe poe = new Poe();

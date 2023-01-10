@@ -1,4 +1,4 @@
-package survey.backend.entities;
+package survey.backend.repository.entities;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -12,8 +12,10 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-@Table
+//@Table(name="users")
 @Entity
+@Table(name="users")
+//@Table
 public class User {
 
     @Id
@@ -27,7 +29,7 @@ public class User {
     private String userPass;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private Set<User_Role> userRoles = new HashSet<>();
+    private Set<UserRole> userRoles = new HashSet<>();
 
     public int getId() {
         return id;
@@ -53,14 +55,14 @@ public class User {
         this.userPass = userPass;
     }
 
-    public Set<User_Role> getUserRoles() {
+    public Set<UserRole> getUserRoles() {
         return userRoles;
     }
 
-    public void setUserRoles(Set<User_Role> userRoles) {
+    public void setUserRoles(Set<UserRole> userRoles) {
         this.userRoles = userRoles;
 
-        for (User_Role r : userRoles) {
+        for (UserRole r : userRoles) {
             r.setUser(this);
         }
     }

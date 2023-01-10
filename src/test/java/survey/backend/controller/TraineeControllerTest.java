@@ -35,7 +35,7 @@ class TraineeControllerTest {
     void testGetByIdOk() throws Exception {
 
         // prepare
-        int id = 123;
+        long id = 123;
         var traineeDto = TraineeDto.builder()
                 .id(id)
                 .lastname("Stallone")
@@ -65,7 +65,7 @@ class TraineeControllerTest {
     void testGetByIdKoNotFound() throws Exception {
 
         // prepare
-        int id = 0;
+        long id = 0;
         var traineeDto = TraineeDto.builder().build();
         given(traineeService.findById(id))
                 .willReturn(Optional.empty())

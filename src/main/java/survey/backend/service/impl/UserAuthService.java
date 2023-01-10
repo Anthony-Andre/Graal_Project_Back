@@ -9,8 +9,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import survey.backend.entities.User;
-import survey.backend.entities.User_Role;
+import survey.backend.repository.entities.User;
+import survey.backend.repository.entities.UserRole;
 import survey.backend.repository.UserRepository;
 import survey.backend.vo.Request;
 
@@ -31,7 +31,7 @@ public class UserAuthService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userRepository.findByUserName(username).get();
 
-        List<User_Role> userRoles = user.getUserRoles().stream().collect(Collectors.toList());
+        List<UserRole> userRoles = user.getUserRoles().stream().collect(Collectors.toList());
 
         List<GrantedAuthority> grantedAuthorities = userRoles.stream().map(r -> {
             return new SimpleGrantedAuthority(r.getRole());
@@ -50,7 +50,7 @@ public class UserAuthService implements UserDetailsService {
         user.setUserPass(passwordEncoder.encode(request.getUserPwd()));
 
         user.setUserRoles(request.getRoles().stream().map(r -> {
-            User_Role ur = new User_Role();
+            UserRole ur = new UserRole();
             ur.setRole(r);
             return ur;
         }).collect(Collectors.toSet()));

@@ -1,4 +1,4 @@
-package survey.backend.entities;
+package survey.backend.repository.entities;
 
 import lombok.Getter;
 import lombok.Setter;
