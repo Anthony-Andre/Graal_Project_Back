@@ -4,6 +4,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import survey.backend.dto.PoeDto;
 import survey.backend.dto.SurveyDto;
+import survey.backend.repository.SurveyRepository;
 import survey.backend.repository.TraineeRepository;
 import survey.backend.util.StreamUtils;
 
@@ -12,8 +13,8 @@ import java.util.Optional;
 
 public class SurveyService implements survey.backend.service.SurveyService{
 
-    //@Autowired
-    //private SurveyRepository surveyRepository;
+    @Autowired
+    private SurveyRepository surveyRepository;
 
     @Autowired
     private ModelMapper modelMapper;
