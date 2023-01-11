@@ -47,7 +47,7 @@ public class SurveyService implements survey.backend.service.SurveyService{
     @Override
     public Optional<SurveyDto> addQuestion(long surveyId, long questionId) {
         return surveyRepository.findById(surveyId)
-                .flatMap(surveyEntity -> surveyRepository.findById(questionId)
+                .flatMap(surveyEntity -> questionRepository.findById(questionId)
                         .map(questionEntity -> {
                             // add trainee to poe
                             surveyEntity.getQuestions().add(questionEntity);
