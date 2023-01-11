@@ -1,19 +1,33 @@
 package survey.backend.service.impl;
 
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import survey.backend.dto.QuestionDto;
-import survey.backend.dto.SurveyDto;
+import survey.backend.repository.QuestionRepository;
+import survey.backend.util.StreamUtils;
 
 import java.util.Collection;
 import java.util.Optional;
 
+@Service
 public class QuestionService implements survey.backend.service.QuestionService {
+
+    @Autowired
+    private QuestionRepository questionRepository;
+
+    @Autowired
+    private ModelMapper modelMapper;
+
     @Override
-    public Collection<SurveyDto> findAll() {
-        return null;
+    public Collection<QuestionDto> findAll() {
+        return StreamUtils.toStream(this.questionRepository.findAll())
+                .map(questionEntity -> modelMapper.map(questionEntity, QuestionDto.class))
+                .toList();
     }
 
     @Override
-    public Optional<SurveyDto> findById(long id) {
+    public Optional<QuestionDto> findById(long id) {
         return Optional.empty();
     }
 
@@ -23,7 +37,7 @@ public class QuestionService implements survey.backend.service.QuestionService {
     }
 
     @Override
-    public SurveyDto add(SurveyDto surveyDto) {
+    public QuestionDto add(QuestionDto surveyDto) {
         return null;
     }
 
