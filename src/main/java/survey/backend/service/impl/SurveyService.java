@@ -2,13 +2,9 @@ package survey.backend.service.impl;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import survey.backend.dto.PoeDto;
-import survey.backend.dto.PoeFullDto;
 import survey.backend.dto.SurveyDto;
 import survey.backend.repository.QuestionRepository;
 import survey.backend.repository.SurveyRepository;
-import survey.backend.repository.TraineeRepository;
-import survey.backend.repository.entities.Poe;
 import survey.backend.repository.entities.Survey;
 import survey.backend.util.StreamUtils;
 
@@ -31,14 +27,12 @@ public class SurveyService implements survey.backend.service.SurveyService{
         return StreamUtils.toStream(surveyRepository.findAll())
                 .map(surveyEntity -> modelMapper.map(surveyEntity, SurveyDto.class))
                 .toList();
-        //return null;
     }
 
     @Override
     public Optional<SurveyDto> findById(long id) {
         return surveyRepository.findById(id)
                 .map(surveyEntity -> modelMapper.map(surveyEntity, SurveyDto.class));
-        //return Optional.empty();
     }
 
     @Override
@@ -46,7 +40,6 @@ public class SurveyService implements survey.backend.service.SurveyService{
         Survey surveyEntity = modelMapper.map(surveyDto, Survey.class);
         surveyRepository.save(surveyEntity);
         return modelMapper.map(surveyEntity, SurveyDto.class);
-        //return null;
     }
 
     @Override
@@ -62,7 +55,6 @@ public class SurveyService implements survey.backend.service.SurveyService{
                             return modelMapper.map(surveyEntity, SurveyDto.class);
                         })
                 );
-        //return Optional.empty();
     }
 
     @Override
@@ -81,7 +73,6 @@ public class SurveyService implements survey.backend.service.SurveyService{
                     // return poe updated as DTO
                     return Optional.of(modelMapper.map(surveyEntity, SurveyDto.class));
                 });
-        //return Optional.empty();
     }
 
     @Override
@@ -92,6 +83,5 @@ public class SurveyService implements survey.backend.service.SurveyService{
                     return true;
                 })
                 .orElse(false);
-        //return false;
     }
 }
