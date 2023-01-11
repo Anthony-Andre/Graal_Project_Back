@@ -92,8 +92,14 @@ public class PoeService implements survey.backend.service.PoeService {
 
     @Override
     public Optional<PoeFullDto> removeTrainee(long poeId, long traineeId) {
-        // TODO
-        return Optional.empty();
+        return this.poeRepository.findById(poeId)
+                .flatMap(poeEntity -> {
+                    Optional<Trainee> optTrainee = this.traineeRepository.findById(traineeId);
+                    if (optTrainee.isEmpty()) {return Optional.empty();}
+                    poeEntity.getTrainees().remove(optTrainee.get());
+                    this.poeRepository.save(poeEntity);
+                    return Optional.of(modelMapper.map(poeEntity, PoeFullDto.class));
+                });
     }
 
     @Override
@@ -111,5 +117,7 @@ public class PoeService implements survey.backend.service.PoeService {
                 })
                 .orElse(false);
     }
+
+
 
 }

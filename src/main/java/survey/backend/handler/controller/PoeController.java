@@ -133,5 +133,15 @@ public class PoeController {
         }
     }
 
+    @PatchMapping("{poeId}/deleteTrainee/{traineeId}")
+    public PoeFullDto deleteTrainee(
+            @PathVariable("poeId") long poeId,
+            @PathVariable("traineeId") long traineeId
+    ) {
+        Optional<PoeFullDto> optFullPoe = this.poeService.removeTrainee(poeId, traineeId);
+        if (optFullPoe.isPresent()) {return optFullPoe.get();}
+        throw NoDataFoundError.withId("Trainee", traineeId);
+    }
+
 
 }
