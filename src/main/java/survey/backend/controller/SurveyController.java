@@ -1,4 +1,4 @@
-package survey.backend.handler.controller;
+package survey.backend.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
