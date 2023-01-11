@@ -143,5 +143,12 @@ public class PoeController {
         throw NoDataFoundError.withId("Trainee", traineeId);
     }
 
+    @PatchMapping("{poeId}/clearTrainees")
+    public PoeFullDto clear (@PathVariable("poeId") long poeId) {
+        Optional<PoeFullDto> optFullPoe = this.poeService.clearTrainees(poeId);
+        if (optFullPoe.isPresent()) {return optFullPoe.get();}
+        throw NoDataFoundError.withId("Poe", poeId);
+    }
+
 
 }

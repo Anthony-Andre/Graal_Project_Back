@@ -104,8 +104,12 @@ public class PoeService implements survey.backend.service.PoeService {
 
     @Override
     public Optional<PoeFullDto> clearTrainees(long poeId) {
-        // TODO
-        return Optional.empty();
+        return this.poeRepository.findById(poeId)
+                .flatMap(poeEntity -> {
+                    poeEntity.getTrainees().clear();
+                    this.poeRepository.save(poeEntity);
+                    return Optional.of(modelMapper.map(poeEntity, PoeFullDto.class));
+                });
     }
 
     @Override
