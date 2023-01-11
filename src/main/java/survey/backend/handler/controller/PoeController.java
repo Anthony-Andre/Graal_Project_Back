@@ -106,7 +106,8 @@ public class PoeController {
     @PatchMapping("/{poeId}/addTrainee/{traineeId}")
     public PoeFullDto addTrainee(
             @PathVariable("poeId") long poeId,
-            @PathVariable("traineeId") long traineeId)
+            @PathVariable("traineeId") long traineeId
+    )
     {
         return poeService.addTrainee(poeId, traineeId)
                 .orElseThrow(() -> NoDataFoundError.withIds(
