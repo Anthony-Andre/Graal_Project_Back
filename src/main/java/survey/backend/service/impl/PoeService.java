@@ -9,6 +9,7 @@ import survey.backend.dto.PoeFullDto;
 import survey.backend.repository.TraineeRepository;
 import survey.backend.repository.entities.Poe;
 import survey.backend.repository.PoeRepository;
+import survey.backend.repository.entities.Trainee;
 import survey.backend.util.StreamUtils;
 
 import java.util.Collection;
