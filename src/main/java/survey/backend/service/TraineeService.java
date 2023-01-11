@@ -1,7 +1,6 @@
 package survey.backend.service;
 
 import survey.backend.dto.TraineeDto;
-// import survey.backend.repository.entities.Trainee;
 
 import java.util.Optional;
 

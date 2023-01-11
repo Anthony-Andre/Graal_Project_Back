@@ -9,9 +9,6 @@ import survey.backend.repository.TraineeRepository;
 import survey.backend.util.StreamUtils;
 
 import java.util.Optional;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-import java.util.stream.StreamSupport;
 
 @Service
 public class TraineeService implements survey.backend.service.TraineeService {
@@ -24,7 +21,6 @@ public class TraineeService implements survey.backend.service.TraineeService {
 
     @Override
     public Iterable<TraineeDto> findAll() {
-        //  return this.traineeRepository.findAll();
         return StreamUtils.toStream(this.traineeRepository.findAll())
                 .map(traineeEntity -> modelMapper.map(traineeEntity, TraineeDto.class))
                 .toList();

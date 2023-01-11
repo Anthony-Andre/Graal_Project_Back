@@ -1,8 +1,6 @@
 package survey.backend.service;
 
-import survey.backend.dto.PoeFullDto;
 import survey.backend.dto.SurveyDto;
-import survey.backend.dto.TraineeDto;
 
 import java.util.Collection;
 import java.util.Optional;
