@@ -1,34 +1,52 @@
 package survey.backend.service.impl;
 
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import survey.backend.dto.QuestionDto;
-import survey.backend.dto.SurveyDto;
+import survey.backend.repository.QuestionRepository;
+import survey.backend.repository.entities.Question;
+import survey.backend.util.StreamUtils;
 
 import java.util.Collection;
 import java.util.Optional;
 
+@Service
 public class QuestionService implements survey.backend.service.QuestionService {
+
+    @Autowired
+    private QuestionRepository questionRepository;
+
+    @Autowired
+    private ModelMapper modelMapper;
+
     @Override
-    public Collection<SurveyDto> findAll() {
-        return null;
+    public Collection<QuestionDto> findAll() {
+        return StreamUtils.toStream(this.questionRepository.findAll())
+                .map(questionEntity -> modelMapper.map(questionEntity, QuestionDto.class))
+                .toList();
     }
 
     @Override
-    public Optional<SurveyDto> findById(long id) {
-        return Optional.empty();
+    public Optional<QuestionDto> findById(long id) {
+        return this.questionRepository.findById(id)
+                .map(questionEntity -> modelMapper.map(questionEntity, QuestionDto.class));
     }
 
     @Override
-    public Optional<QuestionDto> search(String title) {
-        return Optional.empty();
+    public QuestionDto add(QuestionDto questionDto) {
+        Question questionEntity = modelMapper.map(questionDto, Question.class);
+        this.questionRepository.save(questionEntity);
+        return modelMapper.map(questionEntity, QuestionDto.class);
     }
 
     @Override
-    public SurveyDto add(SurveyDto surveyDto) {
-        return null;
-    }
-
-    @Override
-    public boolean remove(long surveyId) {
+    public boolean remove(long questionId) {
+        Optional<Question> oQuestion = this.questionRepository.findById(questionId);
+        if (oQuestion.isPresent()) {
+            this.questionRepository.delete(oQuestion.get());
+            return true;
+        }
         return false;
     }
 }
