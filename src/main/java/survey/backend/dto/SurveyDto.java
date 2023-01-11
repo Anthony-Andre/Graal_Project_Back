@@ -22,4 +22,5 @@ public class SurveyDto {
     private Level level;
     private PoeType poeType;
     private Set<Question> questions;
+
 }
