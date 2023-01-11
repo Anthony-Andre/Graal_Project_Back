@@ -3,7 +3,6 @@ package survey.backend.repository.entities;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
-import survey.backend.repository.enums.AnswerType;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -12,7 +11,8 @@ import java.util.Set;
 @Getter
 @Setter
 @Entity
-public class Question {
+public class Answer {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -20,13 +20,12 @@ public class Question {
     @Column(nullable = false)
     private String text;
 
-    @Enumerated(EnumType.STRING)
-    @Column(length = 11, nullable = false)
-    private AnswerType answerType;
+    //@Column(nullable = false)
+    //private Long questionID;
 
-    @Builder.Default
-    @OneToMany
-    @JoinColumn(name="question_id")
-    private Set<Answer> answers = new HashSet<>();
+    //@Builder.Default
+    //@OneToMany
+    //@JoinColumn(name="question_id")
+    //private Question question;
 
 }
