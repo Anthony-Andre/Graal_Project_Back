@@ -6,8 +6,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 import survey.backend.repository.entities.Question;
-import survey.backend.repository.enums.Level;
-import survey.backend.repository.enums.PoeType;
+import survey.backend.dto.enums.Level;
+import survey.backend.dto.enums.PoeType;
 
 import java.util.Set;
 

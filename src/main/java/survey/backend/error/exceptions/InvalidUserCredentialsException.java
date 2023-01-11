@@ -1,4 +1,4 @@
-package survey.backend.error;
+package survey.backend.error.exceptions;
 
 public class InvalidUserCredentialsException extends RuntimeException {
 

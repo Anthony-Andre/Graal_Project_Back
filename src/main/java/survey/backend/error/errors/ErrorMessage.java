@@ -1,4 +1,4 @@
-package survey.backend.error;
+package survey.backend.error.errors;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;

@@ -17,12 +17,12 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-import survey.backend.error.DisabledUserException;
-import survey.backend.error.InvalidUserCredentialsException;
+import survey.backend.error.exceptions.DisabledUserException;
+import survey.backend.error.exceptions.InvalidUserCredentialsException;
 import survey.backend.service.impl.UserAuthService;
 import survey.backend.util.JwtUtil;
-import survey.backend.vo.Request;
-import survey.backend.vo.Response;
+import survey.backend.dto.vo.Request;
+import survey.backend.dto.vo.Response;
 
 
 @RestController
