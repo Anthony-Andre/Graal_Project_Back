@@ -11,7 +11,7 @@ public interface PoeService {
      * find all poe
      * @return collection of poe found
      */
-    Collection<PoeDto> findAll();
+    Collection<PoeFullDto> findAll();
 
     /**
      * find poe by its id

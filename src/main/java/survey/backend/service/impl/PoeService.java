@@ -27,9 +27,9 @@ public class PoeService implements survey.backend.service.PoeService {
     @Autowired
     ModelMapper modelMapper;
 
-    public Collection<PoeDto> findAll() {
+    public Collection<PoeFullDto> findAll() {
         return StreamUtils.toStream(poeRepository.findAll())
-                .map(poeEntity -> modelMapper.map(poeEntity, PoeDto.class))
+                .map(poeEntity -> modelMapper.map(poeEntity, PoeFullDto.class))
                 .toList();
     }
 

@@ -88,7 +88,7 @@ public class PoeController {
 //    }
 
     @GetMapping
-    public Collection<PoeDto> findAll() {
+    public Collection<PoeFullDto> findAll() {
         return this.poeService.findAll();
     }
 
