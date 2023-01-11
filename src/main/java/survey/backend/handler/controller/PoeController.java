@@ -7,12 +7,13 @@ import org.springframework.web.bind.annotation.*;
 import survey.backend.dto.PoeDto;
 import survey.backend.dto.PoeFullDto;
 import survey.backend.error.NoDataFoundError;
-import survey.backend.service.impl.PoeService;
+import survey.backend.service.PoeService;
 
 import javax.validation.Valid;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("api/poe")
@@ -20,6 +21,8 @@ public class PoeController {
 
     @Autowired
     private PoeService poeService;
+
+
 
 //    @GetMapping
 //    public Iterable<PoeFullDto> findAll(){
@@ -129,4 +132,23 @@ public class PoeController {
             throw NoDataFoundError.withId("poe", id);
         }
     }
+
+    @PatchMapping("{poeId}/deleteTrainee/{traineeId}")
+    public PoeFullDto deleteTrainee(
+            @PathVariable("poeId") long poeId,
+            @PathVariable("traineeId") long traineeId
+    ) {
+        Optional<PoeFullDto> optFullPoe = this.poeService.removeTrainee(poeId, traineeId);
+        if (optFullPoe.isPresent()) {return optFullPoe.get();}
+        throw NoDataFoundError.withId("Trainee", traineeId);
+    }
+
+    @PatchMapping("{poeId}/clearTrainees")
+    public PoeFullDto clear (@PathVariable("poeId") long poeId) {
+        Optional<PoeFullDto> optFullPoe = this.poeService.clearTrainees(poeId);
+        if (optFullPoe.isPresent()) {return optFullPoe.get();}
+        throw NoDataFoundError.withId("Poe", poeId);
+    }
+
+
 }
