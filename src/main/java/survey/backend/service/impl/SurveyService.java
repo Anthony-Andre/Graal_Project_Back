@@ -2,6 +2,7 @@ package survey.backend.service.impl;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import survey.backend.dto.SurveyDto;
 import survey.backend.repository.QuestionRepository;
 import survey.backend.repository.SurveyRepository;
@@ -11,6 +12,7 @@ import survey.backend.util.StreamUtils;
 import java.util.Collection;
 import java.util.Optional;
 
+@Service
 public class SurveyService implements survey.backend.service.SurveyService{
 
     @Autowired
@@ -47,7 +49,7 @@ public class SurveyService implements survey.backend.service.SurveyService{
         return surveyRepository.findById(surveyId)
                 .flatMap(surveyEntity -> surveyRepository.findById(questionId)
                         .map(questionEntity -> {
-                            // add trainee to poe<
+                            // add trainee to poe
                             surveyEntity.getQuestions().add(questionEntity);
                             // sync with DB
                             surveyRepository.save(surveyEntity);

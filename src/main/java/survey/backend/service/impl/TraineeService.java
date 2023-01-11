@@ -75,7 +75,7 @@ public class TraineeService implements survey.backend.service.TraineeService {
 
     @Override
     public boolean delete(long id) {
-        Optional<Trainee> oTrainee = this.traineeRepository.findById((long) id);
+        Optional<Trainee> oTrainee = this.traineeRepository.findById(id);
         if (oTrainee.isPresent()) {
             this.traineeRepository.delete(oTrainee.get());
             return true;
