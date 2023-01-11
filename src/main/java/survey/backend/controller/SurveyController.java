@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import survey.backend.dto.SurveyDto;
-import survey.backend.error.NoDataFoundError;
+import survey.backend.error.errors.NoDataFoundError;
 import survey.backend.service.impl.SurveyService;
 
 

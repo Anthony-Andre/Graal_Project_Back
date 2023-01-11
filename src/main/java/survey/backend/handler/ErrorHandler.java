@@ -8,12 +8,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.client.HttpStatusCodeException;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
-import survey.backend.error.BadRequestError;
-import survey.backend.error.ErrorMessage;
-import survey.backend.error.NoDataFoundError;
+import survey.backend.error.errors.BadRequestError;
+import survey.backend.error.errors.ErrorMessage;
+import survey.backend.error.errors.NoDataFoundError;
 
 @Order(Ordered.HIGHEST_PRECEDENCE)
 @ControllerAdvice

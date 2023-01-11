@@ -6,7 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import survey.backend.dto.PoeDto;
 import survey.backend.dto.PoeFullDto;
-import survey.backend.error.NoDataFoundError;
+import survey.backend.error.errors.NoDataFoundError;
 import survey.backend.service.impl.PoeService;
 
 import javax.validation.Valid;
