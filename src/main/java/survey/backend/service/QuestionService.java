@@ -15,4 +15,5 @@ public interface QuestionService {
 
     boolean remove(long questionId);
 
+
 }
