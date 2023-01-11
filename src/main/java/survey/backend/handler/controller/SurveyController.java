@@ -34,7 +34,7 @@ public class SurveyController {
 
     @PatchMapping
     public SurveyDto add(@Valid @RequestBody SurveyDto surveyDto){
-        return surveyService.add(SurveyDto);
+        return surveyService.add(surveyDto);
     }
 
     @PatchMapping("/{surveyId}/addQuestion/{questionId}")
