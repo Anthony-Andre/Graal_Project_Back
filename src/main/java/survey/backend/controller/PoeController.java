@@ -103,7 +103,7 @@ public class PoeController {
         return poeService.add(poeDto);
     }
 
-    @PatchMapping("{id}")
+    @PutMapping
     public PoeFullDto update(@RequestBody PoeDto poeDto) {
         return this.poeService.update(poeDto)
                 .orElseThrow(() -> NoDataFoundError.withId("Poe", Math.toIntExact(poeDto.getId())));
