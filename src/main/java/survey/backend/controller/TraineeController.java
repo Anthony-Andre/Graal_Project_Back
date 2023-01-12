@@ -1,13 +1,12 @@
-package survey.backend.handler.controller;
+package survey.backend.controller;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import survey.backend.dto.TraineeDto;
-import survey.backend.repository.entities.Trainee;
-import survey.backend.error.BadRequestError;
-import survey.backend.error.NoDataFoundError;
+import survey.backend.error.errors.BadRequestError;
+import survey.backend.error.errors.NoDataFoundError;
 import survey.backend.service.TraineeService;
 
 import javax.validation.Valid;

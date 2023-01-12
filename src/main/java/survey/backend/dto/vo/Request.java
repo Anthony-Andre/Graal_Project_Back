@@ -1,4 +1,4 @@
-package survey.backend.vo;
+package survey.backend.dto.vo;
 
 import lombok.Getter;
 import lombok.Setter;

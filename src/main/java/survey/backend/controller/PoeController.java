@@ -1,4 +1,4 @@
-package survey.backend.handler.controller;
+package survey.backend.controller;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -6,8 +6,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import survey.backend.dto.PoeDto;
 import survey.backend.dto.PoeFullDto;
-import survey.backend.error.NoDataFoundError;
 import survey.backend.service.PoeService;
+import survey.backend.error.errors.NoDataFoundError;
 
 import javax.validation.Valid;
 import java.util.Collection;
@@ -106,7 +106,8 @@ public class PoeController {
     @PatchMapping("/{poeId}/addTrainee/{traineeId}")
     public PoeFullDto addTrainee(
             @PathVariable("poeId") long poeId,
-            @PathVariable("traineeId") long traineeId)
+            @PathVariable("traineeId") long traineeId
+    )
     {
         return poeService.addTrainee(poeId, traineeId)
                 .orElseThrow(() -> NoDataFoundError.withIds(

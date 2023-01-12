@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import survey.backend.repository.entities.User;
 import survey.backend.repository.entities.UserRole;
 import survey.backend.repository.UserRepository;
-import survey.backend.vo.Request;
+import survey.backend.dto.vo.Request;
 
 import java.util.List;
 import java.util.stream.Collectors;

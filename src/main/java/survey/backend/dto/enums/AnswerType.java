@@ -1,4 +1,4 @@
-package survey.backend.repository.enums;
+package survey.backend.dto.enums;
 
 public enum AnswerType {
     YES_NO,

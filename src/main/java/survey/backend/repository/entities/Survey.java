@@ -2,7 +2,7 @@ package survey.backend.repository.entities;
 
 import lombok.Getter;
 import lombok.Setter;
-import survey.backend.repository.enums.Level;
+import survey.backend.dto.enums.Level;
 
 import javax.persistence.*;
 import java.util.HashSet;

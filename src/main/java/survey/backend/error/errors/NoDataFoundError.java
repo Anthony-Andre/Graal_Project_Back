@@ -1,4 +1,4 @@
-package survey.backend.error;
+package survey.backend.error.errors;
 
 import java.util.Collection;
 import java.util.Map;

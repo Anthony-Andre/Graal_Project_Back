@@ -14,8 +14,8 @@ import io.jsonwebtoken.MalformedJwtException;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.SignatureException;
 import io.jsonwebtoken.UnsupportedJwtException;
-import survey.backend.error.JwtTokenMalformedException;
-import survey.backend.error.JwtTokenMissingException;
+import survey.backend.error.exceptions.JwtTokenMalformedException;
+import survey.backend.error.exceptions.JwtTokenMissingException;
 
 @Component
 public class JwtUtil {

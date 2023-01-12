@@ -1,4 +1,4 @@
-package survey.backend.error;
+package survey.backend.error.errors;
 
 public abstract class AbstractErrorDetailMessage {
 }
