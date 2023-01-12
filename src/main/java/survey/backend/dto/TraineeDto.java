@@ -30,6 +30,8 @@ public class TraineeDto {
     @Past
     private Date birthdate;
 
+    private Long poe_id;
+
     public Trainee toTrainee() {
         Trainee trainee = new Trainee();
         trainee.setId(this.id);

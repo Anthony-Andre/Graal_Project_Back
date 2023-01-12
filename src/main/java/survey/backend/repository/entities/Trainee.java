@@ -34,5 +34,8 @@ public class Trainee {
     @Column(name = "phone_number", nullable = false)
     private String phoneNumber;
 
+    @Column(name="poe_id")
+    private Long poe_id;
+
 
 }
