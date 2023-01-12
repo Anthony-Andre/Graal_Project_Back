@@ -103,6 +103,12 @@ public class PoeController {
         return poeService.add(poeDto);
     }
 
+    @PatchMapping("{id}")
+    public PoeFullDto update(@RequestBody PoeDto poeDto) {
+        return this.poeService.update(poeDto)
+                .orElseThrow(() -> NoDataFoundError.withId("Poe", Math.toIntExact(poeDto.getId())));
+    }
+
     @PatchMapping("/{poeId}/addTrainee/{traineeId}")
     public PoeFullDto addTrainee(
             @PathVariable("poeId") long poeId,
