@@ -49,7 +49,7 @@ public class SurveyService implements survey.backend.service.SurveyService{
     public Optional<SurveyDto> update (SurveyDto surveyDto) {
         return this.surveyRepository.findById(surveyDto.getId())
                 .flatMap(surveyEntity -> {
-                    this.modelMapper.map(surveyEntity, surveyDto);
+                    this.modelMapper.map(surveyDto, surveyEntity);
                     this.surveyRepository.save(surveyEntity);
                     return Optional.of(modelMapper.map(surveyEntity, SurveyDto.class));
                 });

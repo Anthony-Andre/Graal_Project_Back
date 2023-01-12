@@ -49,7 +49,7 @@ public class SurveyController {
             @PathVariable("questionId") long questionId
     )
     {
-        return surveyService.addQuestion(surveyId, surveyId)
+        return surveyService.addQuestion(surveyId, questionId)
                 .orElseThrow(() -> NoDataFoundError.withIds(
                         Map.of("survey", surveyId, "question", questionId)));
     }
