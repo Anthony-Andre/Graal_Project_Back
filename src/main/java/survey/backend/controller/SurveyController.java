@@ -12,6 +12,7 @@ import javax.validation.Valid;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("api/survey")
@@ -59,6 +60,23 @@ public class SurveyController {
                         Map.of("Questions", questionIds)
                 ));
     }
+
+    @PatchMapping("{surveyId}/removeQuestion/{questionId}")
+    public SurveyDto removeQuestion (
+            @PathVariable("surveyId") long surveyId,
+            @PathVariable("questionId") long questionId
+    ) {
+       return this.surveyService.removeQuestion(surveyId, questionId)
+               .orElseThrow(() -> NoDataFoundError.withIds(
+                       Map.of("Survey", surveyId, "Question", questionId)));
+    }
+
+    @PatchMapping("{surveyId}/clearQuestions")
+    public SurveyDto clearQuestions(@PathVariable("surveyId") long surveyId) {
+        return this.surveyService.clearQuestions(surveyId)
+                .orElseThrow(() -> NoDataFoundError.withId("Survey", surveyId));
+    }
+
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
