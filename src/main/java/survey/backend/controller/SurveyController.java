@@ -18,7 +18,6 @@ import java.util.Optional;
 @RequestMapping("api/survey")
 public class SurveyController {
 
-//    TODO !!!
     @Autowired
     private SurveyService surveyService;
 
@@ -36,6 +35,12 @@ public class SurveyController {
     @PatchMapping
     public SurveyDto add(@Valid @RequestBody SurveyDto surveyDto){
         return surveyService.add(surveyDto);
+    }
+
+    @PutMapping
+    public SurveyDto update(@RequestBody SurveyDto surveyDto) {
+        return surveyService.update(surveyDto)
+                .orElseThrow(() -> NoDataFoundError.withId("Survey", Math.toIntExact(surveyDto.getId())));
     }
 
     @PatchMapping("/{surveyId}/addQuestion/{questionId}")

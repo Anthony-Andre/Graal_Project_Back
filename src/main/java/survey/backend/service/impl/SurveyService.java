@@ -46,6 +46,16 @@ public class SurveyService implements survey.backend.service.SurveyService{
     }
 
     @Override
+    public Optional<SurveyDto> update (SurveyDto surveyDto) {
+        return this.surveyRepository.findById(surveyDto.getId())
+                .flatMap(surveyEntity -> {
+                    this.modelMapper.map(surveyEntity, surveyDto);
+                    this.surveyRepository.save(surveyEntity);
+                    return Optional.of(modelMapper.map(surveyEntity, SurveyDto.class));
+                });
+    }
+
+    @Override
     public Optional<SurveyDto> addQuestion(long surveyId, long questionId) {
         return surveyRepository.findById(surveyId)
                 .flatMap(surveyEntity -> questionRepository.findById(questionId)
