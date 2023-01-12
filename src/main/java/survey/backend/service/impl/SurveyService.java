@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import survey.backend.dto.SurveyDto;
 import survey.backend.repository.QuestionRepository;
 import survey.backend.repository.SurveyRepository;
+import survey.backend.repository.entities.Question;
 import survey.backend.repository.entities.Survey;
 import survey.backend.util.StreamUtils;
 
@@ -45,6 +46,16 @@ public class SurveyService implements survey.backend.service.SurveyService{
     }
 
     @Override
+    public Optional<SurveyDto> update (SurveyDto surveyDto) {
+        return this.surveyRepository.findById(surveyDto.getId())
+                .flatMap(surveyEntity -> {
+                    this.modelMapper.map(surveyDto, surveyEntity);
+                    this.surveyRepository.save(surveyEntity);
+                    return Optional.of(modelMapper.map(surveyEntity, SurveyDto.class));
+                });
+    }
+
+    @Override
     public Optional<SurveyDto> addQuestion(long surveyId, long questionId) {
         return surveyRepository.findById(surveyId)
                 .flatMap(surveyEntity -> questionRepository.findById(questionId)
@@ -73,6 +84,28 @@ public class SurveyService implements survey.backend.service.SurveyService{
                     // sync with DB
                     surveyRepository.save(surveyEntity);
                     // return poe updated as DTO
+                    return Optional.of(modelMapper.map(surveyEntity, SurveyDto.class));
+                });
+    }
+
+    @Override
+    public Optional<SurveyDto> removeQuestion(long surveyId, long questionId) {
+        return this.surveyRepository.findById(surveyId)
+                .flatMap(surveyEntity -> {
+                    Optional<Question> optQuestion = this.questionRepository.findById(questionId);
+                    if (optQuestion.isEmpty()) {return Optional.empty();}
+                    surveyEntity.getQuestions().remove(optQuestion.get());
+                    this.surveyRepository.save(surveyEntity);
+                    return Optional.of(modelMapper.map(surveyEntity, SurveyDto.class));
+                });
+    }
+
+    @Override
+    public Optional<SurveyDto> clearQuestions(long surveyId) {
+        return this.surveyRepository.findById(surveyId)
+                .flatMap(surveyEntity -> {
+                    surveyEntity.getQuestions().clear();
+                    this.surveyRepository.save(surveyEntity);
                     return Optional.of(modelMapper.map(surveyEntity, SurveyDto.class));
                 });
     }

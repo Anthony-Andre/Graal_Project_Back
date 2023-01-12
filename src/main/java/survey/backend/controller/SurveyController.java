@@ -12,12 +12,12 @@ import javax.validation.Valid;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("api/survey")
 public class SurveyController {
 
-//    TODO !!!
     @Autowired
     private SurveyService surveyService;
 
@@ -37,13 +37,19 @@ public class SurveyController {
         return surveyService.add(surveyDto);
     }
 
+    @PutMapping
+    public SurveyDto update(@RequestBody SurveyDto surveyDto) {
+        return surveyService.update(surveyDto)
+                .orElseThrow(() -> NoDataFoundError.withId("Survey", Math.toIntExact(surveyDto.getId())));
+    }
+
     @PatchMapping("/{surveyId}/addQuestion/{questionId}")
     public SurveyDto addQuestion(
             @PathVariable("surveyId") long surveyId,
             @PathVariable("questionId") long questionId
     )
     {
-        return surveyService.addQuestion(surveyId, surveyId)
+        return surveyService.addQuestion(surveyId, questionId)
                 .orElseThrow(() -> NoDataFoundError.withIds(
                         Map.of("survey", surveyId, "question", questionId)));
     }
@@ -59,6 +65,23 @@ public class SurveyController {
                         Map.of("Questions", questionIds)
                 ));
     }
+
+    @PatchMapping("{surveyId}/removeQuestion/{questionId}")
+    public SurveyDto removeQuestion (
+            @PathVariable("surveyId") long surveyId,
+            @PathVariable("questionId") long questionId
+    ) {
+       return this.surveyService.removeQuestion(surveyId, questionId)
+               .orElseThrow(() -> NoDataFoundError.withIds(
+                       Map.of("Survey", surveyId, "Question", questionId)));
+    }
+
+    @PatchMapping("{surveyId}/clearQuestions")
+    public SurveyDto clearQuestions(@PathVariable("surveyId") long surveyId) {
+        return this.surveyService.clearQuestions(surveyId)
+                .orElseThrow(() -> NoDataFoundError.withId("Survey", surveyId));
+    }
+
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)

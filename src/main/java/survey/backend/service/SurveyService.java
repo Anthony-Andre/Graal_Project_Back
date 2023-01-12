@@ -13,9 +13,15 @@ public interface SurveyService {
 
     SurveyDto add(SurveyDto surveyDto);
 
+    Optional<SurveyDto> update(SurveyDto surveyDto);
+
     Optional<SurveyDto> addQuestion(long surveyId, long questionId);
 
     Optional<SurveyDto> addQuestions(long surveyId, Collection<Long> questionsIds);
+
+    Optional<SurveyDto> removeQuestion(long surveyId, long questionId);
+
+    Optional<SurveyDto> clearQuestions(long surveyId);
 
     boolean remove(long surveyId);
 }
