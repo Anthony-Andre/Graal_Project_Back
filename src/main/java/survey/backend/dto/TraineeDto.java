@@ -40,6 +40,7 @@ public class TraineeDto {
         trainee.setEmail(this.email);
         trainee.setPhoneNumber(this.phoneNumber);
         trainee.setBirthDate(this.birthdate);
+        trainee.setPoe_id(this.poe_id);
 
         return trainee;
     }

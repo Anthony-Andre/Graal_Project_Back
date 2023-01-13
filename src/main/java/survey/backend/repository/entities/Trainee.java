@@ -37,5 +37,4 @@ public class Trainee {
     @Column(name="poe_id")
     private Long poe_id;
 
-
 }
