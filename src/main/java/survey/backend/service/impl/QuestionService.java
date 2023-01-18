@@ -2,8 +2,10 @@ package survey.backend.service.impl;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.AutoConfigureOrder;
 import org.springframework.stereotype.Service;
 import survey.backend.dto.QuestionDto;
+import survey.backend.repository.AnswerRepository;
 import survey.backend.repository.QuestionRepository;
 import survey.backend.repository.entities.Question;
 import survey.backend.util.StreamUtils;
@@ -16,6 +18,9 @@ public class QuestionService implements survey.backend.service.QuestionService {
 
     @Autowired
     private QuestionRepository questionRepository;
+
+    @Autowired
+    private AnswerRepository answerRepository;
 
     @Autowired
     private ModelMapper modelMapper;
