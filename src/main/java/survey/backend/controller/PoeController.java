@@ -1,6 +1,7 @@
 package survey.backend.controller;
 
 
+import com.mailjet.client.MailjetResponse;
 import com.mailjet.client.errors.MailjetException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -159,9 +160,10 @@ public class PoeController {
     }
 
     @PostMapping("{poeId}/mailToTrainees")
-    @ResponseStatus(HttpStatus.OK)
-    public void mail (@PathVariable("poeId") long poeId) throws MailjetException {
-        this.poeService.mail(poeId);
+    public int mail (@PathVariable("poeId") long poeId) throws MailjetException {
+        MailjetResponse response = this.poeService.mail(poeId);
+        return response.getStatus();
+
     }
 
 
