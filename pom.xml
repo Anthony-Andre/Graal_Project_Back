@@ -114,6 +114,15 @@
             <scope>test</scope>
         </dependency>
 
+        <!-- Mail -->
+
+
+        <dependency>
+            <groupId>com.mailjet</groupId>
+            <artifactId>mailjet-client</artifactId>
+            <version>5.2.1</version>
+        </dependency>
+
 
     </dependencies>
 
