@@ -1,6 +1,7 @@
 package survey.backend.controller;
 
 
+import com.mailjet.client.errors.MailjetException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -156,6 +157,14 @@ public class PoeController {
         if (optFullPoe.isPresent()) {return optFullPoe.get();}
         throw NoDataFoundError.withId("Poe", poeId);
     }
+
+    @PostMapping("{poeId}/mailToTrainees")
+    @ResponseStatus(HttpStatus.OK)
+    public void mail (@PathVariable("poeId") long poeId) throws MailjetException {
+        this.poeService.mail(poeId);
+    }
+
+
 
 
 }
