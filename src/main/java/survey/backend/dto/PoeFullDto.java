@@ -17,5 +17,6 @@ import java.util.Set;
     @Setter
     public class PoeFullDto extends PoeDto {
         private Set<TraineeDto> trainees;
+        private Boolean mailSend;
     }
 
