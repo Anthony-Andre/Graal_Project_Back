@@ -1,5 +1,6 @@
 package survey.backend.service;
 
+import com.mailjet.client.errors.MailjetException;
 import survey.backend.dto.PoeDto;
 import survey.backend.dto.PoeFullDto;
 
@@ -75,5 +76,7 @@ public interface PoeService {
      * @return true if found and removed, false if not found
      */
     boolean remove(long poeId);
+
+    void mail(long poeId) throws MailjetException;
 
 }

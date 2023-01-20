@@ -1,11 +1,21 @@
 package survey.backend.service.impl;
 
 
+import com.mailjet.client.ClientOptions;
+import com.mailjet.client.MailjetClient;
+import com.mailjet.client.MailjetRequest;
+import com.mailjet.client.MailjetResponse;
+import com.mailjet.client.errors.MailjetException;
+import com.mailjet.client.resource.Emailv31;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import survey.backend.dto.PoeDto;
 import survey.backend.dto.PoeFullDto;
+import survey.backend.dto.TraineeDto;
 import survey.backend.repository.TraineeRepository;
 import survey.backend.repository.entities.Poe;
 import survey.backend.repository.PoeRepository;
@@ -13,6 +23,7 @@ import survey.backend.repository.entities.Trainee;
 import survey.backend.util.StreamUtils;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -26,6 +37,18 @@ public class PoeService implements survey.backend.service.PoeService {
 
     @Autowired
     ModelMapper modelMapper;
+
+    @Value("${mail.api}")
+    private String MJPublic;
+
+    @Value("${mail.secret}")
+    private String MJSecret;
+
+    @Value("${mail.sender}")
+    private String Sender;
+
+    MailjetRequest request;
+    MailjetResponse response;
 
     public Collection<PoeFullDto> findAll() {
         return StreamUtils.toStream(poeRepository.findAll())
@@ -120,6 +143,54 @@ public class PoeService implements survey.backend.service.PoeService {
                     return true;
                 })
                 .orElse(false);
+    }
+
+    @Override
+    public void mail(long poeId) throws MailjetException {
+        // Create optional of trainees included in poe to mail
+        Optional<List<TraineeDto>> traineesDto = this.poeRepository.findById(poeId)
+                .flatMap(poeEntity -> {
+                    var traineeEntities = StreamUtils.toStream(poeEntity.getTrainees()).toList();
+                    if (traineeEntities.isEmpty()) {return Optional.empty();}
+                    var trainees = traineeEntities
+                            .stream()
+                            .map(trainee -> this.modelMapper.map(trainee, TraineeDto.class))
+                            .toList();
+                    return Optional.of(trainees);
+                });
+        // If trainees != 0, send mail to each trainee
+        if (traineesDto.isPresent()) {
+            List<TraineeDto> trainees = traineesDto.get();
+            trainees.forEach(trainee -> {
+                ClientOptions options = ClientOptions.builder()
+                        .apiKey(MJPublic)
+                        .apiSecretKey(MJSecret)
+                        .build();
+                MailjetClient client = new MailjetClient(options);
+                request = new MailjetRequest(Emailv31.resource)
+                        .property(Emailv31.MESSAGES, new JSONArray()
+                                .put(new JSONObject()
+                                        .put(Emailv31.Message.FROM, new JSONObject()
+                                                .put("Email", Sender)
+                                                .put("Name", "Geoffrey from the back"))
+                                        .put(Emailv31.Message.TO, new JSONArray()
+                                                .put(new JSONObject()
+                                                        .put("Email", trainee.getEmail())
+                                                        .put("Name", "You")))
+                                        .put(Emailv31.Message.SUBJECT, "Suivi post-stagiaire")
+                                        .put(Emailv31.Message.TEXTPART, "Greetings from Mailjet!")
+                                        .put(Emailv31.Message.HTMLPART,
+                                                "<img src=\"https://media.licdn.com/dms/image/C4D0BAQGj8GUDOoaB0g/company-logo_200_200/0/1587987303565?e=2147483647&v=beta&t=i-CCnedSuyst6egrg_8fJrGYe2YmlAGfR2VUECVk7iw\">"+
+                                                        "<h3>Cher stagiaire, merci de bien vouloir vous inscrire au nouveau site de suivi post-stagiaire <a href=\"http://localhost:4200/\">Suivi post-stagiaire Aelion</a>!</body><br />En attente de vous retrouver !")));
+                try {
+                    response = client.post(request);
+                } catch (MailjetException e) {
+                    throw new RuntimeException(e);
+                }
+                System.out.println(response.getStatus());
+                System.out.println(response.getData());
+            });
+        }
     }
 
 
