@@ -41,4 +41,7 @@ public class Poe {
     @JoinColumn(name = "poe_id")
     private Set<Trainee> trainees = new HashSet<>();
 
+    @Column(nullable = false)
+    private Boolean mailSend;
+
 }

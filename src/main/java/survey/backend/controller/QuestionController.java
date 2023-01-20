@@ -16,7 +16,6 @@ import survey.backend.service.impl.SurveyService;
 
 import javax.validation.Valid;
 import java.util.Collection;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("api/question")
