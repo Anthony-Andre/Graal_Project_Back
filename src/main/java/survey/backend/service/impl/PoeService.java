@@ -146,7 +146,7 @@ public class PoeService implements survey.backend.service.PoeService {
     }
 
     @Override
-    public void mail(long poeId) throws MailjetException {
+    public MailjetResponse mail(long poeId) throws MailjetException {
         // Create optional of trainees included in poe to mail
         Optional<List<TraineeDto>> traineesDto = this.poeRepository.findById(poeId)
                 .flatMap(poeEntity -> {
@@ -191,6 +191,7 @@ public class PoeService implements survey.backend.service.PoeService {
                 System.out.println(response.getData());
             });
         }
+        return response;
     }
 
 
