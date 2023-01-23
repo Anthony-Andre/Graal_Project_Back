@@ -80,8 +80,4 @@ public interface PoeService {
 
     MailjetResponse mail(long poeId, long surveyId) throws MailjetException;
 
-//    addPoe() {
-//
-//    }
-
 }

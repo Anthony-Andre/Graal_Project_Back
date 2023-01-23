@@ -24,4 +24,7 @@ public interface SurveyService {
     Optional<SurveyDto> clearQuestions(long surveyId);
 
     boolean remove(long surveyId);
+
+    Optional<SurveyDto> addPoe(long surveyId, long poeId);
+
 }

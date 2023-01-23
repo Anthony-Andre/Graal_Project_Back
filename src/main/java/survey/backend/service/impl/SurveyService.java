@@ -3,8 +3,8 @@ package survey.backend.service.impl;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import survey.backend.dto.PoeFullDto;
 import survey.backend.dto.SurveyDto;
+import survey.backend.repository.PoeRepository;
 import survey.backend.repository.QuestionRepository;
 import survey.backend.repository.SurveyRepository;
 import survey.backend.repository.entities.Question;
@@ -16,6 +16,9 @@ import java.util.Optional;
 
 @Service
 public class SurveyService implements survey.backend.service.SurveyService{
+
+    @Autowired
+    private PoeRepository poeRepository;
 
     @Autowired
     private SurveyRepository surveyRepository;
@@ -121,9 +124,19 @@ public class SurveyService implements survey.backend.service.SurveyService{
                 .orElse(false);
     }
 
-        //    @Override
-    //    public addPoe() {
-    //
-    //    }
+    @Override
+    public Optional<SurveyDto> addPoe(long surveyId, long poeId) {
+        return surveyRepository.findById(surveyId)
+                .flatMap(surveyEntity -> poeRepository.findById(poeId)
+                        .map(poeEntity -> {
+                            // add survey to poe
+                            surveyEntity.getPoes().add(poeEntity);
+                            // sync with DB
+                            surveyRepository.save(surveyEntity);
+                            // return survey updated
+                            return modelMapper.map(surveyEntity, SurveyDto.class);
+                        })
+                );
+    }
 
 }
