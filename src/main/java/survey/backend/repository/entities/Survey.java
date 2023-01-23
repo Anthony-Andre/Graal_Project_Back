@@ -2,13 +2,12 @@ package survey.backend.repository.entities;
 
 import lombok.Getter;
 import lombok.Setter;
+import survey.backend.dto.PoeFullDto;
 import survey.backend.dto.enums.Level;
 
 import javax.persistence.*;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @Getter @Setter
 @Entity
@@ -35,4 +34,11 @@ public class Survey {
     )
     private List<Question> questions = new ArrayList<Question>() {
     };
+
+    @ManyToMany
+    @JoinTable(name = "survey_contains_poes",
+            joinColumns = @JoinColumn(name = "survey_id"),
+            inverseJoinColumns = @JoinColumn(name = "poe_id")
+    )
+    private List<Poe> poes = new ArrayList<>();
 }
