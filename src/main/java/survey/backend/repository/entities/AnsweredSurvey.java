@@ -26,6 +26,4 @@ public class AnsweredSurvey {
     @OneToMany(mappedBy = "answeredSurvey", cascade = CascadeType.ALL)
     private List<Response> responses;
 
-
-
 }

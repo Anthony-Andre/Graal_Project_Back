@@ -5,7 +5,9 @@ import lombok.Setter;
 import survey.backend.dto.enums.Level;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Getter @Setter
@@ -31,5 +33,6 @@ public class Survey {
             joinColumns = @JoinColumn(name = "survey_id"),
             inverseJoinColumns = @JoinColumn(name = "question_id")
     )
-    private Set<Question> questions = new HashSet<>();
+    private List<Question> questions = new ArrayList<Question>() {
+    };
 }

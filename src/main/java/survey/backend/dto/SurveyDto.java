@@ -9,6 +9,8 @@ import survey.backend.repository.entities.Question;
 import survey.backend.dto.enums.Level;
 import survey.backend.dto.enums.PoeType;
 
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Set;
 
 @SuperBuilder
@@ -21,6 +23,6 @@ public class SurveyDto {
     private String title;
     private Level level;
     private PoeType poeType;
-    private Set<Question> questions;
+    private LinkedList<Question> questions;
 
 }
