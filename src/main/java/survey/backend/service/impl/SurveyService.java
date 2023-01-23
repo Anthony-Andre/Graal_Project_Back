@@ -3,6 +3,7 @@ package survey.backend.service.impl;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import survey.backend.dto.PoeFullDto;
 import survey.backend.dto.SurveyDto;
 import survey.backend.repository.QuestionRepository;
 import survey.backend.repository.SurveyRepository;
@@ -46,7 +47,7 @@ public class SurveyService implements survey.backend.service.SurveyService{
     }
 
     @Override
-    public Optional<SurveyDto> update (SurveyDto surveyDto) {
+    public Optional<SurveyDto> update(SurveyDto surveyDto) {
         return this.surveyRepository.findById(surveyDto.getId())
                 .flatMap(surveyEntity -> {
                     this.modelMapper.map(surveyDto, surveyEntity);
@@ -119,4 +120,10 @@ public class SurveyService implements survey.backend.service.SurveyService{
                 })
                 .orElse(false);
     }
+
+        //    @Override
+    //    public addPoe() {
+    //
+    //    }
+
 }
