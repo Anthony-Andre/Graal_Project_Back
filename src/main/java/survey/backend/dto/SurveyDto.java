@@ -5,13 +5,12 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
+import survey.backend.repository.entities.Poe;
 import survey.backend.repository.entities.Question;
 import survey.backend.dto.enums.Level;
 import survey.backend.dto.enums.PoeType;
 
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Set;
 
 @SuperBuilder
 @NoArgsConstructor
@@ -23,6 +22,7 @@ public class SurveyDto {
     private String title;
     private Level level;
     private PoeType poeType;
-    private LinkedList<Question> questions;
+    private List<Question> questions;
+    private List<Poe> poes;
 
 }
