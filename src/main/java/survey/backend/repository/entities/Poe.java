@@ -42,6 +42,6 @@ public class Poe {
     private Set<Trainee> trainees = new HashSet<>();
 
     @Column(nullable = false)
-    private Boolean mailSend;
+    private Boolean mailSend = false;
 
 }

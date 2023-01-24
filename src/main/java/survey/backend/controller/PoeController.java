@@ -164,7 +164,7 @@ public class PoeController {
             @PathVariable("poeId") long poeId,
             @PathVariable("surveyId") long surveyId
     ) throws MailjetException {
-        MailjetResponse response = this.poeService.mail(surveyId, poeId);
+        MailjetResponse response = this.poeService.mail(poeId, surveyId);
         return response.getStatus();
 
     }
