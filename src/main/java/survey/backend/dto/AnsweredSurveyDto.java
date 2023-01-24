@@ -17,7 +17,7 @@ import java.util.List;
 @AllArgsConstructor
 public class AnsweredSurveyDto {
 
-    private int Id;
+    private Long id;
     private Survey survey;
     private Trainee trainee;
     private List<Response> responses;

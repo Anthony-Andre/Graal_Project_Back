@@ -5,7 +5,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
-import survey.backend.repository.entities.AnsweredSurvey;
 import survey.backend.repository.entities.Question;
 
 @SuperBuilder
@@ -14,9 +13,8 @@ import survey.backend.repository.entities.Question;
 @AllArgsConstructor
 public class ResponseDto {
 
-    private int Id;
+    private int id;
     private String answer;
     private Question question;
-    private AnsweredSurvey answeredSurvey;
 
 }
