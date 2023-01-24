@@ -23,6 +23,6 @@ public class SurveyDto {
     private String title;
     private Level level;
     private PoeType poeType;
-    private LinkedList<Question> questions;
+    private List<Question> questions;
 
 }

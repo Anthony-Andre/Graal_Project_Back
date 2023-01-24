@@ -27,8 +27,8 @@ public class Question {
     private AnswerType answerType;
 
     @ElementCollection
-    @CollectionTable(name = "answer_purposed", joinColumns = @JoinColumn(name = "question_id"))
-    @Column(name = "answer_purposed", nullable = false)
+    @CollectionTable(name = "answer_proposed", joinColumns = @JoinColumn(name = "question_id"))
+    @Column(name = "answer_proposed", nullable = false)
     private List<String> answersProposed;
 
 
