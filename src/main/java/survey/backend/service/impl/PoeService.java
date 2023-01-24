@@ -33,6 +33,9 @@ public class PoeService implements survey.backend.service.PoeService {
     PoeRepository poeRepository;
 
     @Autowired
+    SurveyService surveyService;
+
+    @Autowired
     TraineeRepository traineeRepository;
 
     @Autowired
@@ -146,7 +149,7 @@ public class PoeService implements survey.backend.service.PoeService {
     }
 
     @Override
-    public MailjetResponse mail(long poeId) throws MailjetException {
+    public MailjetResponse mail(long poeId, long surveyId) throws MailjetException {
         // Create optional of trainees included in poe to mail
         Optional<List<TraineeDto>> traineesDto = this.poeRepository.findById(poeId)
                 .flatMap(poeEntity -> {
@@ -189,6 +192,10 @@ public class PoeService implements survey.backend.service.PoeService {
                 }
                 System.out.println(response.getStatus());
                 System.out.println(response.getData());
+
+                if (response.getStatus() == 200) {
+                    surveyService.addPoe(surveyId, poeId);
+                }
             });
         }
         return response;

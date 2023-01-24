@@ -31,6 +31,4 @@ public class Question {
     @Column(name = "answer_proposed", nullable = false)
     private List<String> answersProposed;
 
-
-
 }
