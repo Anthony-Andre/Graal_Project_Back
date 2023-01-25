@@ -185,7 +185,7 @@ public class PoeService implements survey.backend.service.PoeService {
                                         .put(Emailv31.Message.TEXTPART, "Greetings from Mailjet!")
                                         .put(Emailv31.Message.HTMLPART,
                                                 "<img src=\"https://media.licdn.com/dms/image/C4D0BAQGj8GUDOoaB0g/company-logo_200_200/0/1587987303565?e=2147483647&v=beta&t=i-CCnedSuyst6egrg_8fJrGYe2YmlAGfR2VUECVk7iw\">"+
-                                                        "<h3>Bonjour "+trainee.getFirstname()+" "+trainee.getLastname()+", merci de bien vouloir vous inscrire au nouveau site de suivi post-stagiaire <a href=\"http://localhost:4200/survey/"+surveyId+"/trainee/"+trainee.getId()+"\">Suivi post-stagiaire Aelion</a>!</body><br />En attente de vous retrouver !")));
+                                                        "<h3>Bonjour "+trainee.getFirstname()+", dans le cadre du suivi post-formation, nous souhaiterions connaitre ton avis en répondant au <a href=\"http://localhost:4200/survey/"+surveyId+"/trainee/"+trainee.getId()+"\">formulaire suivant</a>!</body><br />En attente de te lire !")));
                 try {
                     response = client.post(request);
                 } catch (MailjetException e) {
