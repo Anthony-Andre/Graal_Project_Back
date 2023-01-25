@@ -12,6 +12,7 @@ import org.json.JSONObject;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import survey.backend.dto.PoeDto;
 import survey.backend.dto.PoeFullDto;
@@ -149,7 +150,7 @@ public class PoeService implements survey.backend.service.PoeService {
     }
 
     @Override
-    public MailjetResponse mail(long poeId, long surveyId) throws MailjetException {
+    public Optional<PoeFullDto> mail(long poeId, long surveyId, String stopDate) throws MailjetException {
         // Create optional of trainees included in poe to mail
         Optional<List<TraineeDto>> traineesDto = this.poeRepository.findById(poeId)
                 .flatMap(poeEntity -> {
@@ -197,10 +198,28 @@ public class PoeService implements survey.backend.service.PoeService {
                     surveyService.addPoe(surveyId, poeId);
                 }
             });
-        }
-        return response;
+            return this.poeRepository.findById(poeId)
+                    .flatMap(poeEntity -> {
+                        if (stopDate.equals("oneMonth")) {
+                            poeEntity.setOneMonthMailSent(response.getStatus());
+                        } else if (stopDate.equals("sixMonth")) {
+                            poeEntity.setSixMonthMailSent(response.getStatus());
+                        } else {
+                            poeEntity.setOneYearMailSent(response.getStatus());
+                        }
+                        this.poeRepository.save(poeEntity);
+                        return Optional.of(this.modelMapper.map(poeEntity, PoeFullDto.class));
+                    });
+        };
+        // If trainees = 0, then send error message
+        System.out.println("Trainee missing");
+        return this.poeRepository.findById(poeId)
+                .flatMap(poeEntity -> {
+                    if (stopDate.equals("oneMonth")) {poeEntity.setOneMonthMailSent(400);}
+                    else if (stopDate.equals("sixMonth")) {poeEntity.setSixMonthMailSent(400);}
+                    else {poeEntity.setOneYearMailSent(400);}
+                    this.poeRepository.save(poeEntity);
+                    return Optional.of(this.modelMapper.map(poeEntity, PoeFullDto.class));
+                });
     }
-
-
-
 }

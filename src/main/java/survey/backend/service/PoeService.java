@@ -78,6 +78,6 @@ public interface PoeService {
      */
     boolean remove(long poeId);
 
-    MailjetResponse mail(long poeId, long surveyId) throws MailjetException;
+    Optional<PoeFullDto> mail(long poeId, long surveyId, String stopDate) throws MailjetException;
 
 }

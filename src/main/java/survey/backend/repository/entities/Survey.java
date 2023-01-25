@@ -32,8 +32,7 @@ public class Survey {
             joinColumns = @JoinColumn(name = "survey_id"),
             inverseJoinColumns = @JoinColumn(name = "question_id")
     )
-    private List<Question> questions = new ArrayList<Question>() {
-    };
+    private List<Question> questions = new ArrayList<Question>() {};
 
     @ManyToMany
     @JoinTable(name = "survey_contains_poes",

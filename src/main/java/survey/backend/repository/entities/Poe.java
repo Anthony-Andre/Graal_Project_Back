@@ -42,6 +42,14 @@ public class Poe {
     private Set<Trainee> trainees = new HashSet<>();
 
     @Column(nullable = false)
-    private Boolean mailSend = false;
+    private Integer oneMonthMailSent = 0;
+
+    @Column(nullable = false)
+    private Integer sixMonthMailSent = 0;
+
+    @Column(nullable = false)
+    private Integer oneYearMailSent = 0;
+
+
 
 }

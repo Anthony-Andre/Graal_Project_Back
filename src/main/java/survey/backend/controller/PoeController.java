@@ -159,14 +159,15 @@ public class PoeController {
         throw NoDataFoundError.withId("Poe", poeId);
     }
 
-    @PostMapping("{poeId}/mailToPoe/{surveyId}")
-    public int mail (
+    @PatchMapping("{poeId}/mailToPoe/{surveyId}")
+    public PoeFullDto mail (
             @PathVariable("poeId") long poeId,
-            @PathVariable("surveyId") long surveyId
+            @PathVariable("surveyId") long surveyId,
+            @RequestBody String stopDate
     ) throws MailjetException {
-        MailjetResponse response = this.poeService.mail(poeId, surveyId);
-        return response.getStatus();
-
+        Optional<PoeFullDto> optFullPoe = this.poeService.mail(poeId, surveyId, stopDate);
+        if (optFullPoe.isPresent()) {return optFullPoe.get();}
+        throw  NoDataFoundError.withId("Poe", poeId);
     }
 
 
