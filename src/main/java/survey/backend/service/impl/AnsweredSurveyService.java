@@ -9,9 +9,7 @@ import survey.backend.repository.AnsweredSurveyRepository;
 import survey.backend.repository.ResponseRepository;
 import survey.backend.repository.SurveyRepository;
 import survey.backend.repository.TraineeRepository;
-import survey.backend.repository.entities.AnsweredSurvey;
-import survey.backend.repository.entities.Question;
-import survey.backend.repository.entities.Response;
+import survey.backend.repository.entities.*;
 import survey.backend.util.StreamUtils;
 
 import java.util.Collection;
@@ -53,6 +51,16 @@ public class AnsweredSurveyService implements survey.backend.service.AnsweredSur
         AnsweredSurvey answeredSurveyEntity = modelMapper.map(answeredSurveyDto, AnsweredSurvey.class);
         this.answeredSurveyRepository.save(answeredSurveyEntity);
         return modelMapper.map(answeredSurveyEntity, AnsweredSurveyDto.class);
+    }
+
+    @Override
+    public List<AnsweredSurveyDto> search(Long surveyId, Long traineeId) {
+        Survey survey = this.surveyRepository.findById(surveyId).get();
+        Trainee trainee = this.traineeRepository.findById(traineeId).get();
+        return this.answeredSurveyRepository.bySurveyAndTrainee(survey, trainee)
+                .stream()
+                .map(answeredSurveyEntity -> modelMapper.map(answeredSurveyEntity, AnsweredSurveyDto.class))
+                .toList();
     }
 
     @Override

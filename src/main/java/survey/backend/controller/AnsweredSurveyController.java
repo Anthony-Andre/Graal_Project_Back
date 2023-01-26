@@ -12,6 +12,7 @@ import survey.backend.service.impl.AnsweredSurveyService;
 
 import javax.validation.Valid;
 import java.util.Collection;
+import java.util.List;
 
 @RestController
 @RequestMapping("api/answered-survey")
@@ -34,6 +35,16 @@ public class AnsweredSurveyController {
     public AnsweredSurveyDto findById(@PathVariable("id") long id){
         return answeredSurveyService.findById(id)
                 .orElseThrow(() -> NoDataFoundError.withId("answeredSurvey", id));
+    }
+
+    @GetMapping("/search")
+    public boolean search(
+            @RequestParam(name="surveyId") Long surveyId,
+            @RequestParam(name="traineeId") Long traineeId
+    ) {
+       int size = this.answeredSurveyService.search(surveyId, traineeId).size();
+       if (size == 0) {return false;}
+       return true;
     }
 
     @DeleteMapping("/{id}")
