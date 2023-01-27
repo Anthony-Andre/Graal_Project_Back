@@ -164,6 +164,7 @@ public class PoeService implements survey.backend.service.PoeService {
                 });
         // If trainees != 0, send mail to each trainee
         if (traineesDto.isPresent()) {
+            Poe poe = this.poeRepository.findById(poeId).get();
             List<TraineeDto> trainees = traineesDto.get();
             trainees.forEach(trainee -> {
                 ClientOptions options = ClientOptions.builder()
@@ -176,12 +177,12 @@ public class PoeService implements survey.backend.service.PoeService {
                                 .put(new JSONObject()
                                         .put(Emailv31.Message.FROM, new JSONObject()
                                                 .put("Email", Sender)
-                                                .put("Name", "Geoffrey from the back"))
+                                                .put("Name", "Aelion"))
                                         .put(Emailv31.Message.TO, new JSONArray()
                                                 .put(new JSONObject()
                                                         .put("Email", trainee.getEmail())
-                                                        .put("Name", "You")))
-                                        .put(Emailv31.Message.SUBJECT, "Suivi post-stagiaire")
+                                                        .put("Name", trainee.getFirstname())))
+                                        .put(Emailv31.Message.SUBJECT, "Suivi post-Formation "+poe.getTitle())
                                         .put(Emailv31.Message.TEXTPART, "Greetings from Mailjet!")
                                         .put(Emailv31.Message.HTMLPART,
                                                 "<img src=\"https://media.licdn.com/dms/image/C4D0BAQGj8GUDOoaB0g/company-logo_200_200/0/1587987303565?e=2147483647&v=beta&t=i-CCnedSuyst6egrg_8fJrGYe2YmlAGfR2VUECVk7iw\">"+
